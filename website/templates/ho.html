@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher Officials - Indian Military</title>
+    <link rel="stylesheet" href="../static/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .content-section {
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .rank-section {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Indian Military</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/higher_officials">Higher Officials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/branches">Branches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/soldiers_and_newbies">Soldiers and Newbies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training_progs">Training Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/operations">Operations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <section class="content-section container">
+        <h1 class="text-center">Higher Officials</h1>
+        <p class="text-center">Explore the ranks and their respective details:</p>
+
+        <div id="higher_officials-content">
+            <!-- Display data for Lieutenant Generals -->
+            <h2>Lieutenant Generals</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Soldier ID</th>
+                        <th>Personal Weapon ID</th>
+                        <th>Name</th>
+                        <th>Organization (OC ID)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in lt_gen_data %}
+                    <tr>
+                        <td>{{ record[0] }}</td>
+                        <td>{{ record[1] }}</td>
+                        <td><a href="/soldiers/{{ record[0] }}">{{ record[2] }}</a></td>
+                        <td><a href="/ocs/{{ record[3] }}">{{ record[3] }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <!-- Display data for Major Generals -->
+            <h2>Major Generals</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Soldier ID</th>
+                        <th>Personal Weapon ID</th>
+                        <th>Name</th>
+                        <th>Division ID</th>
+                        <th>Name of the Division</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in major_gen_data %}
+                    <tr>
+                        <td>{{ record[0] }}</td>
+                        <td>{{ record[1] }}</td>
+                        <td><a href="/soldiers/{{ record[0] }}">{{ record[2] }}</a></td>
+                        <td><a href="/divs/{{ record[3] }}">{{ record[3] }}</a></td>
+                        <td>{{ record[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <!-- Display data for Brigadiers -->
+            <h2>Brigadiers</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Soldier ID</th>
+                        <th>Personal Weapon ID</th>
+                        <th>Name</th>
+                        <th>Brigade ID</th>
+                        <th>Name of the Brigade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in brigadier_data %}
+                    <tr>
+                        <td>{{ record[0] }}</td>
+                        <td>{{ record[1] }}</td>
+                        <td><a href="/soldiers/{{ record[0] }}">{{ record[2] }}</a></td>
+                        <td><a href="/brigades/{{ record[3] }}">{{ record[3] }}</a></td>
+                        <td>{{ record[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <!-- Display data for Colonels -->
+            <h2>Colonels</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Soldier ID</th>
+                        <th>Personal Weapon ID</th>
+                        <th>Name</th>
+                        <th>Battalion ID</th>
+                        <th>Name of the Battalion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in colonel_data %}
+                    <tr>
+                        <td>{{ record[0] }}</td>
+                        <td>{{ record[1] }}</td>
+                        <td><a href="/soldiers/{{ record[0] }}">{{ record[2] }}</a></td>
+                        <td><a href="/battalions/{{ record[3] }}">{{ record[3] }}</a></td>
+                        <td>{{ record[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 bg-dark text-white footer">
+        <p>&copy; 2024 Indian Military. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

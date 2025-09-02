@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <title>Training Programs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Content */
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .branch {
+            margin-bottom: 20px;
+        }
+        .program {
+            border: 1px solid #000;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+        .program:hover {
+            background-color: rgb(255, 255, 255);
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .skills {
+            margin-top: 10px;
+        }
+        .skills ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Indian Military</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/higher_officials">Higher Officials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/branches">Branches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/soldiers_and_newbies">Soldiers and Newbies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training_progs">Training Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/operations">Operations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Training Programs</h1>
+        {% for branch, programs in data.items() %}
+        <div class="branch">
+            <h2>Branch: {{ branch }}</h2>
+            {% for program, details in programs.items() %}
+            <div class="program" onclick="redirect_page('{{ branch }}', '{{ program }}')">
+                <p><strong>Program Name:</strong> {{ program }}</p>
+                <p><strong>Duration:</strong> {{ details.duration }}</p>
+                <div class="skills">
+                    <strong>Skills Taught:</strong>
+                    {% if details.skills %}
+                    <ul>
+                        {% for skill in details.skills %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No skills available.</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Training Programs Database. All rights reserved.</p>
+    </footer>
+    <script>
+        function redirect_page(branch, program) {
+            // replace spaces with underscores
+            branch = branch.replace(/ /g, '_');
+            program = program.replace(/ /g, '_');
+            window.location.href = `/training_progs/${branch}/${program}`;
+        }
+    </script>
+</body>
+</html>

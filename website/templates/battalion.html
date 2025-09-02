@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ battalion.battalion_name }}</title>
+    <link rel="stylesheet" href="../static/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Indian Military</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/higher_officials">Higher Officials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/branches">Branches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/soldiers_and_newbies">Soldiers and Newbies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training_progs">Training Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/operations">Operations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <h1 class="text-center">{{ battalion.battalion_name }}</h1>
+        <div class="card my-4">
+            <div class="card-body">
+                <h4 class="card-title">Battalion Details</h4>
+                <p><strong>Battalion ID:</strong> {{ battalion.battalion_id }}</p>
+                <p><strong>Brigade ID:</strong> {{ battalion.brigade_id }}</p>
+                <p><strong>Colonel Name:</strong> {{ battalion.colonel_name }} (ID: {{ battalion.colonel_id }})</p>
+                <p><strong>Location:</strong> {{ battalion.location.latitude }}, {{ battalion.location.longitude }}</p>
+            </div>
+        </div>
+
+        <!-- Departments Section -->
+        <h2>Departments</h2>
+        {% for department in battalion.departments %}
+        <div class="card my-3">
+            <div class="card-header">
+                {{ department.dept_name }} (ID: {{ department.dept_id }})
+            </div>
+            <div class="card-body">
+                <h5>Soldiers:</h5>
+                <ul class="list-group">
+                    {% for soldier in department.soldier_ids %}
+                    <li class="list-group-item">
+                        <a href="/soldiers/{{ soldier }}" class="text-decoration-none">{{ soldier }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Indian Military. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

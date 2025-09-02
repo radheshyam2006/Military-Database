@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soldier Biodata</title>
+    <link rel="stylesheet" href="../static/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px;
+            /* border: 1px solid #000; */
+        }
+        .biodata-card {
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px;
+        }
+        .biodata-card h2 {
+            /* text-align: center; */
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Indian Military</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/higher_officials">Higher Officials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/branches">Branches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/soldiers_and_newbies">Soldiers and Newbies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training_progs">Training Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/operations">Operations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="biodata-card">
+            <h2>{{ soldier.name }}</h2><hr>
+            <p><strong>ID:</strong> {{ soldier.id }}</p>
+            <p><strong>Name:</strong> {{ soldier.name }}</p>
+            <p><strong>Birth Date:</strong> {{ soldier.birth_date }}</p>
+            <p><strong>Phone Number:</strong> {{ soldier.phone_number }}</p>
+            <p><strong>Date of Joining:</strong> {{ soldier.date_of_joining }}</p>
+            <p><strong>Health Status:</strong> {{ soldier.health_status }}</p>
+            <p><strong>Address:</strong> Street {{ soldier.street_no }}, {{ soldier.city }}, {{ soldier.district }}, {{ soldier.state }}</p>
+        </div>
+
+        <!-- Dependents -->
+        <div class="biodata-card section">
+            <h4>Dependents</h4>
+            {% for dependent in soldier.dependents %}
+            <p><strong>Name:</strong> {{ dependent.name }}</p>
+            <p><strong>Relation:</strong> {{ dependent.relation }}</p>
+            <p><strong>Birth Date:</strong> {{ dependent.birth_date }}</p>
+            <hr>
+            {% endfor %}
+        </div>
+
+        <!-- History -->
+        <div class="biodata-card section">
+            <h4>Military History</h4>
+            {% for record in soldier.history %}
+            <p><strong>Start Date:</strong> {{ record.start_date }}</p>
+            <p><strong>Rank:</strong> {{ record.rank }}</p>
+            <hr>
+            {% endfor %}
+        </div>
+
+        <!-- Awards -->
+        <div class="biodata-card section">
+            <h4>Awards</h4>
+            {% for award in soldier.awards %}
+            <p><strong>Award Name:</strong> {{ award.award_name }}</p>
+            <p><strong>Date Received:</strong> {{ award.date_received }}</p>
+            <hr>
+            {% endfor %}
+        </div>
+
+        <!-- Programs Taught -->
+        <div class="biodata-card section">
+            <h4>Programs Taught</h4>
+            <ul>
+                {% for program in soldier.programs_taught %}
+                <li>{{ program }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Programs Learnt -->
+        <div class="biodata-card section">
+            <h4>Programs Learnt</h4>
+            <ul>
+                {% for program in soldier.programs_learnt %}
+                <li>{{ program }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Indian Military Operations Database. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
