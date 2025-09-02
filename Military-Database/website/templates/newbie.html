@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newbie Biodata</title>
+    <link rel="stylesheet" href="../static/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .biodata-card {
+            border: 1px solid #000;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .biodata-card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Indian Military</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/higher_officials">Higher Officials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/branches">Branches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/soldiers_and_newbies">Soldiers and Newbies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training_progs">Training Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/operations">Operations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="biodata-card">
+            <h2>Newbie Biodata</h2>
+            <p><strong>Name:</strong> {{ newbie.name }}</p>
+            <p><strong>Phone Number:</strong> {{ newbie.phone_number }}</p>
+            <p><strong>Birth Date:</strong> {{ newbie.birth_date }}</p>
+            <p><strong>Address:</strong> Street {{ newbie.street_no }}, {{ newbie.city }}, {{ newbie.district }}, {{ newbie.state }}</p>
+        </div>
+
+        <!-- Enrolled Programs -->
+        <div class="biodata-card section">
+            <h4>Enrolled Programs</h4>
+            <ul>
+                {% for program in newbie.enrolled_programs %}
+                <li>{{ program }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Learnt Programs -->
+        <div class="biodata-card section">
+            <h4>Programs Learnt</h4>
+            <ul>
+                {% for program in newbie.learnt_programs %}
+                <li>{{ program }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Indian Military Operations Database. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
